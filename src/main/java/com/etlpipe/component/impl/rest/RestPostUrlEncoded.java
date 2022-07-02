@@ -2,6 +2,7 @@ package com.etlpipe.component.impl.rest;
 
 import com.etlpipe.component.IComponent;
 import com.etlpipe.component.config.IRestConfig;
+import com.etlpipe.component.config.PipelineGlobalConfig;
 import com.etlpipe.component.config.RestConfigUrlEncoded;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,7 +29,7 @@ public class RestPostUrlEncoded implements IComponent, IRestPost
 
 
     @Override
-    public Object execute(Object previousResponse)
+    public Object execute(Object previousResponse, PipelineGlobalConfig pipelineGlobalConfig)
     {
         System.out.println("Previous stage value : " + previousResponse);
         System.out.println("Executing RestPost() : " + this.name);
@@ -36,7 +37,7 @@ public class RestPostUrlEncoded implements IComponent, IRestPost
 
         RestConfigUrlEncoded configUrlEncoded = (RestConfigUrlEncoded)restConfig;
         JSONObject jsonObject = postRequest(configUrlEncoded.getServiceUrl(), configUrlEncoded.getPayloadMap());
-        System.out.println(jsonObject.toString());
+        System.out.println("Output of RestPostUrlEncoded:: " + jsonObject.toString());
         return jsonObject;
     }
 
@@ -62,11 +63,12 @@ public class RestPostUrlEncoded implements IComponent, IRestPost
         return responseObj;
     }
 
-    /*public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder)
-    {
+    /*public RestTemplate restTemplate(
+        RestTemplateBuilder restTemplateBuilder) {
+
         return restTemplateBuilder
-            .setConnectTimeout(...)
-           .setReadTimeout(...)
-           .build();
+            .setConnectTimeout(Duration.ofSeconds(500))
+            .setReadTimeout(Duration.ofSeconds(500))
+            .build();
     }*/
 }

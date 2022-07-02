@@ -2,6 +2,7 @@ package com.etlpipe.component.impl.rest;
 
 import com.etlpipe.component.IComponent;
 import com.etlpipe.component.config.IRestConfig;
+import com.etlpipe.component.config.PipelineGlobalConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
@@ -26,7 +27,7 @@ public class RestPost implements IComponent, IRestPost
 
 
     @Override
-    public Object execute(Object previousResponse)
+    public Object execute(Object previousResponse, PipelineGlobalConfig pipelineGlobalConfig)
     {
         System.out.println("Previous stage value : " + previousResponse);
         System.out.println("Executing RestPost() : " + this.name);
