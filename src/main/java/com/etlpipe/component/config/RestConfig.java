@@ -1,19 +1,20 @@
 package com.etlpipe.component.config;
 
 import com.etlpipe.component.common.HttpRetrySpec;
+import org.springframework.http.HttpHeaders;
 
 import java.util.Map;
 
 public class RestConfig implements IRestConfig
 {
     private String serviceUrl;
-    private Map<String, String> headers;
+    private HttpHeaders headers;
     private Map<String, String> queryParams;
     private HttpRetrySpec httpRetrySpec;
 
     private RestConfig(){}
 
-    public RestConfig(String serviceUrl, Map<String, String> headers, Map<String, String> queryParams, HttpRetrySpec httpRetrySpec)
+    public RestConfig(String serviceUrl, HttpHeaders headers, Map<String, String> queryParams, HttpRetrySpec httpRetrySpec)
     {
         this.serviceUrl = serviceUrl;
         this.headers = headers;
@@ -31,12 +32,12 @@ public class RestConfig implements IRestConfig
         this.serviceUrl = serviceUrl;
     }
 
-    public Map<String, String> getHeaders()
+    public HttpHeaders getHeaders()
     {
         return headers;
     }
 
-    public void setHeaders(Map<String, String> headers)
+    public void setHeaders(HttpHeaders headers)
     {
         this.headers = headers;
     }
